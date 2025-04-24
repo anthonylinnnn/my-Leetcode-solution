@@ -1,0 +1,43 @@
+int distinguish_string_digits_sum(int p){
+    
+    int a = 0;
+
+    while(p){
+        
+        a += p % 10;
+        p = p / 10;
+    }
+    return a;
+}
+
+
+int countLargestGroup(int n) {
+    int m;
+    int b;
+    int loop;
+    int c[36] = {0};
+      
+    for(int i = 1; i < n + 1; i++){
+    
+    b = distinguish_string_digits_sum(i);
+    c[b-1] += 1;
+    
+    }
+    int max = c[0];
+    for(int j = 1; j < 36; j++){
+        if(c[j]>max){
+            max = c[j];
+        }
+    }
+    int count = 0;
+    for(int v = 0; v < 36; v++){
+        if(c[v] == max){
+            count ++;
+        }
+    }
+    return count ;
+}
+
+
+
+
