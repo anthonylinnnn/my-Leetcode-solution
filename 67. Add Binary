@@ -1,0 +1,87 @@
+char* addBinary(char* a, char* b) {
+
+    char carry = '0';
+    int n;
+
+    if(strlen(a) > strlen(b)){
+        n = strlen(a);
+    }
+    else if(strlen(a) < strlen(b)){
+        n = strlen(b);
+    }
+    else{
+        n = strlen(a);
+    }
+    
+    char* result = (char*) malloc((n + 2)* sizeof(char));
+    result[n + 1] = '\0';
+    char* newA = (char*) malloc((n + 2) * sizeof(char));
+    char* newB = (char*) malloc((n + 2) * sizeof(char));
+
+    for (int i = 0; i < n + 2; i++) {
+        newA[i] = '0';
+        newB[i] = '0';
+    }
+
+    newA[n + 1] = '\0';
+    newB[n + 1] = '\0';
+
+    if(strlen(a) >= strlen(b)){
+        strcpy(newA + (n - strlen(a)), a);
+        strcpy(newB + (n - strlen(b)), b);
+    }else {
+        strcpy(newA + (n - strlen(a)), a);
+        strcpy(newB + (n - strlen(b)), b);
+    }
+
+    for(int i = n - 1; i >= 0; i--){
+        
+        if(newA[i] == '1' && newB[i] == '1'){
+            if(carry == '1'){
+                carry = '1';
+                result[i + 1] = '1';
+            }
+            else{
+                result[i + 1] = '0';
+                carry = '1';
+            }
+        }
+        else if(newA[i] == '0' && newB[i] == '0'){
+            if(carry == '0'){
+                result[i + 1] = '0';
+                carry = '0';
+            }
+            else{
+                result[i + 1] = '1';
+                carry = '0';
+            }
+        }
+        else{
+            if(carry == '0'){
+                result[i + 1] = '1';
+                carry = '0';
+            }
+            else{
+                result[i + 1] = '0';
+                carry = '1';
+            }
+            
+        }
+        
+
+    }
+    if(carry == '1'){
+        result[0] = '1';
+        free(newA);
+        free(newB);
+        return result;
+    }
+    else{
+        char* final_result = strdup(result + 1);
+        free(newA);
+        free(newB);
+        free(result);
+        return final_result;
+    }
+
+}
