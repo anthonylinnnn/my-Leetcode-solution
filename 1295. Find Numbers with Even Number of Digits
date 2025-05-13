@@ -1,0 +1,16 @@
+int findNumbers(int* nums, int numsSize) {
+    int temp = 0;
+    int k;
+
+    for(int i = 0; i < numsSize; i++){
+        
+        k = nums[i] / 10;
+
+        if((0 < k && k < 10) || (100 <= k && k < 1000) || k == 10000){
+            temp++;
+            printf("nums[i]:%d,k:%d,temp:%d\n",nums[i],k,temp);
+        }
+    }
+    
+    return temp;
+}
